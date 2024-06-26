@@ -27,23 +27,63 @@ public class ProductoManager : MonoBehaviour
     public Text cantidadDineroTotal;
     public Text precioProducto1;
     public Text precioProducto2;
+    
+    private GameObject obj1;
+    private GameObject obj2;
+    
+    private int pre1;
+    private int pre2;
+    
+    private int dinerototal;
 
-    void InitialSpawn() {
-        Vector3 pos1 = new Vector3(-120, 20);
-        Vector3 pos2 = new Vector3(256, 20);
-        
-        Instantiate(arrayObjetos[Random.Range(0, arrayObjetos.Length)], pos1, Quaternion.identity);
-        
-        Instantiate(arrayObjetos[Random.Range(0, arrayObjetos.Length)], pos2, Quaternion.identity);
+    private void Start()
+    {
+        Spawn();
     }
 
-    int CheckAlcanza() {
-        if (Convert.ToInt32(precioProducto1.text) + Convert.ToInt32(precioProducto2.text) == Convert.ToInt32(cantidadDineroTotal.text))
-        {
-            return 1;
-        }
+    void Spawn() {
+        Vector3 pos1 = new Vector3(-43, 7, 85);
+        Vector3 pos2 = new Vector3(55, 7, 85);
 
-        return 0;
+        int idxobj1 = Random.Range(0, arrayObjetos.Length - 1);
+        int idxobj2 = Random.Range(0, arrayObjetos.Length - 1);
+        
+        obj1 = Instantiate(arrayObjetos[idxobj1], pos1, Quaternion.identity);
+        
+        obj2 = Instantiate(arrayObjetos[idxobj2], pos2, Quaternion.identity);
+        
+        pre1 = obj1.GetComponent<ProductoScript>().precio;
+        pre2 = obj2.GetComponent<ProductoScript>().precio;
+        
+        precioProducto1.text = pre1.ToString();
+        precioProducto2.text = pre2.ToString();
+        
+        dinerototal = Random.Range(100, 1000);
+        cantidadDineroTotal.text = dinerototal.ToString();
+    }
+
+    public void alcanzaYSobra() {
+        Debug.Log(dinerototal > pre1 + pre2);
+    }
+    
+    public void alcanzaJusto() {
+        Debug.Log(dinerototal == pre1 + pre2);
+    }
+    
+    public void noAlcanza() {
+        Debug.Log(dinerototal < pre1 + pre2);
+    }
+
+    public void clearAll()
+    {
+        Destroy(obj1);
+        Destroy(obj2);
+        
+        cantidadDineroTotal.text = "";
+        precioProducto1.text = "";
+        precioProducto2.text = "";
+        
+        Spawn();
     }
     
 }
