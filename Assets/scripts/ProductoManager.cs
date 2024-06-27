@@ -65,7 +65,7 @@ public class ProductoManager : MonoBehaviour
         precioProducto1.text = pre1.ToString();
         precioProducto2.text = pre2.ToString();
         
-        dinerototal = Random.Range(1, 15);
+        dinerototal = Random.Range(4, 18);
         cantidadDineroTotal.text = dinerototal.ToString();
     }
 
