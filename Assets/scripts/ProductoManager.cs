@@ -42,8 +42,8 @@ public class ProductoManager : MonoBehaviour
     }
 
     void Spawn() {
-        Vector3 pos1 = new Vector3(-43, 7, 85);
-        Vector3 pos2 = new Vector3(55, 7, 85);
+        Vector3 pos2 = new Vector3(2.1f,1.3f, -6.5f);
+        Vector3 pos1 = new Vector3(-1.5f,1.3f, -6.5f);
 
         int idxobj1 = Random.Range(0, arrayObjetos.Length - 1);
         int idxobj2 = Random.Range(0, arrayObjetos.Length - 1);

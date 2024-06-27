@@ -8,12 +8,11 @@ public class ProductoScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(0f, 40f * Time.deltaTime, 0f, Space.Self);
     }
 }
