@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -36,6 +37,12 @@ public class ProductoManager : MonoBehaviour
     
     private int dinerototal;
 
+    [SerializeField] Text text1;
+    [SerializeField] Text res;
+    [SerializeField] Button btnJugar;
+
+    [SerializeField] Text btnJugarTxt;
+
     private void Start()
     {
         Spawn();
@@ -58,24 +65,35 @@ public class ProductoManager : MonoBehaviour
         precioProducto1.text = pre1.ToString();
         precioProducto2.text = pre2.ToString();
         
-        dinerototal = Random.Range(100, 1000);
+        dinerototal = Random.Range(1, 15);
         cantidadDineroTotal.text = dinerototal.ToString();
     }
 
     public void alcanzaYSobra() {
-        Debug.Log(dinerototal > pre1 + pre2);
+        // Debug.Log(dinerototal > pre1 + pre2);
+        ShowEndNotif();
+        Check(dinerototal > pre1 + pre2);
     }
     
     public void alcanzaJusto() {
-        Debug.Log(dinerototal == pre1 + pre2);
+        // Debug.Log(dinerototal == pre1 + pre2);
+        ShowEndNotif();
+        Check(dinerototal == pre1 + pre2);
     }
     
     public void noAlcanza() {
-        Debug.Log(dinerototal < pre1 + pre2);
+        // Debug.Log(dinerototal < pre1 + pre2);
+        ShowEndNotif();
+        Check(dinerototal < pre1 + pre2);
     }
 
     public void clearAll()
     {
+        text1.gameObject.SetActive(false);
+        res.gameObject.SetActive(false);
+        
+        btnJugar.gameObject.SetActive(false);
+        
         Destroy(obj1);
         Destroy(obj2);
         
@@ -84,6 +102,27 @@ public class ProductoManager : MonoBehaviour
         precioProducto2.text = "";
         
         Spawn();
+    }
+
+    void ShowEndNotif() {
+        text1.gameObject.SetActive(true);
+        res.gameObject.SetActive(true);
+        
+        btnJugar.gameObject.SetActive(true);
+    }
+
+    void Check(bool condition)
+    {
+        if (condition)
+        {
+            res.text = "Correcta";
+            btnJugarTxt.text = "Reiniciar el desafio";
+        }
+        else
+        {
+            res.text = "Incorrecta";
+            btnJugarTxt.text = "Volver a intentarlo";
+        }
     }
     
 }
