@@ -61,12 +61,12 @@ public class ProductoManager : MonoBehaviour
         
         pre1 = obj1.GetComponent<ProductoScript>().precio;
         pre2 = obj2.GetComponent<ProductoScript>().precio;
-        
-        precioProducto1.text = pre1.ToString();
-        precioProducto2.text = pre2.ToString();
+
+        precioProducto1.text = "$" + pre1;
+        precioProducto2.text = "$" + pre2;
         
         dinerototal = Random.Range(4, 18);
-        cantidadDineroTotal.text = dinerototal.ToString();
+        cantidadDineroTotal.text = "$" + dinerototal;
     }
 
     public void alcanzaYSobra() {
